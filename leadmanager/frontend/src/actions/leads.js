@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_LEADS, DELETE_LEAD, CREATE_LEAD } from './types';
+import { GET_LEADS, DELETE_LEAD, CREATE_LEAD, GET_ERRORS } from './types';
 
 export const getLeads = () => dispatch => {
   axios.get('/api/leads/')
@@ -18,7 +18,17 @@ export const createLead = (lead) => dispatch => {
         type: CREATE_LEAD,
         payload: res.data
       });
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      };
+      
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors
+      });
+    });
 };
 
 export const deleteLead = (id) => dispatch => {
