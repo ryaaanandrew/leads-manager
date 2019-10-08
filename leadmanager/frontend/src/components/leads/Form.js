@@ -15,6 +15,9 @@ const Form = props => {
       message
     }
     props.createLead(lead);
+    setName('');
+    setEmail('');
+    setMessage('');
   };
 
   return(

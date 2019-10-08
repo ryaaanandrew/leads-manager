@@ -10,9 +10,18 @@ const Alerts = props => {
 
   useEffect(() => {
     const { error, alert } = props;
-    if(error.msg.name) alert.error('Name is required');
-    if(error.msg.email) alert.error('Email is required');
+    
+    if(error.msg.name) alert.error(`Name: ${error.msg.name.join()}`);
+    if(error.msg.email) alert.error(`Email: ${error.msg.email.join()}`);
+    if(error.msg.message) alert.error(`Email: ${error.msg.message.join()}`);
   }, [props.error]);
+
+  useEffect(() => {
+    const { alert, message } = props;
+    
+    if(message.deleteLead) alert.success(message.deleteLead); 
+    if(message.createLead) alert.success(message.createLead); 
+  }, [props.message]);
 
   return(
     <Fragment />
@@ -21,7 +30,8 @@ const Alerts = props => {
 
 const mapStateToProps = state => {
   return({
-    error: state.errors
+    error: state.errors,
+    message: state.messages
   });
 };
 
