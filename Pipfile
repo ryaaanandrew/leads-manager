@@ -9,7 +9,6 @@ pylint = "*"
 [packages]
 django = "*"
 djangorestframework = "*"
-drango-rest-knox = "*"
 django-rest-knox = "*"
 
 [requires]
